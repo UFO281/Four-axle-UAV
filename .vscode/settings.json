@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.h": "c",
+        "*.c": "c",
+        "*.ex": "makefile",
+        "STC12CXX.H": "cpp"
+    }
+}
