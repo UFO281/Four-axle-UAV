@@ -1,5 +1,6 @@
-<h1 style="text-align: center;">四轴无人机项目基于STC12C5A60S2</h1>
+<h1 style="text-align: center;">四轴无人机项目</h1>
 
+    本无人机项目分为两个版本：直流永磁有刷电机版与直流永磁无刷电机版本
 
 # 项目框架目录简介
 
