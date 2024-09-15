@@ -1,6 +1,0 @@
-".\Objects\STARTUP.obj",
-".\Objects\main.obj",
-".\Objects\pwm.obj",
-".\Objects\uart.obj" 
-TO ".\Objects\F" 
-PRINT(".\Listings\F.m51") RAMSIZE(256) 
