@@ -1,14 +1,16 @@
 /**
  * @file main.c
  * @author wls (ufo281@outlook.com) 
- * @brief 
+ * 
+ * @brief bootloader branch
+ * 
  * @version 1.0
  * @date 2024-09-15
  * 
  * @copyright Copyright (c) 2024
  * 
  */
-#include "stm32f10x.h"                  // Device header
+#include "stm32f10x.h"                  
 #include "Delay.h"
 #include "usart.h"
 
