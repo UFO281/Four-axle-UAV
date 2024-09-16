@@ -32,9 +32,9 @@ int main(void)
 	{
 
 		GPIO_WriteBit(GPIOA, GPIO_Pin_0, (BitAction)0);
-		Delay_ms(100);
+		Delay_ms(1000);
 		GPIO_WriteBit(GPIOA, GPIO_Pin_0, (BitAction)1);
-		Delay_ms(100);
+		Delay_ms(1000);
 
         printf("hello world! \r\n");
 	}

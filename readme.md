@@ -19,6 +19,8 @@
     
     Hardware_Circuit_Design：硬件电路设计部分
 
+    del_file.bat：删除Project\keil\Objects文件下编译生成的过程文件
+    
 # 项目开发流程管理方法
     1. 模块化编程，模块化开发
     
