@@ -17,11 +17,10 @@
 #include "mpu6050.h"
 #include "aht10.h"
 
-
 int main(void)
 {
     Usart1_Init();
-    LED_Init();
+    // LED_Init();
 
     AHT10Init(); // 温湿度传感器初始化  SCL:PB3 SDA:PB4
     AHT10Reset();
@@ -33,9 +32,9 @@ int main(void)
         printf("mpu6050 dmp init failed!\r\n");
     }
 
-    float pitch, roll, yaw;    // 欧拉角
-    short aacx, aacy, aacz;    // 加速度传感器原始数据
-    short gyrox, gyroy, gyroz; // 陀螺仪原始数据
+    float pitch, roll, yaw; // 欧拉角
+    // short aacx, aacy, aacz;    // 加速度传感器原始数据
+    // short gyrox, gyroy, gyroz; // 陀螺仪原始数据
 
     float AHT10_temp = 0; // 检测到的温度数据
     u8 AHT10_humi = 0;    // 检测到的湿度数据
@@ -54,11 +53,17 @@ int main(void)
                (int)AHT10_temp,
                AHT10_humi);
 
-#if 1                                               /*Get MPU6050 data*/
-        MPU_Get_Accelerometer(&aacx, &aacy, &aacz); // 得到加速度传感器数据 X Y Z加速度数据
-        MPU_Get_Gyroscope(&gyrox, &gyroy, &gyroz);  // 得到陀螺仪数据 X Y Z角速度数据
-        mpu_dmp_get_data(&pitch, &roll, &yaw);      // 得到俯仰角pitch，和翻滚角roll，yaw航向角数据
-#endif                                              /*Get MPU6050 data*/
+#if 1 /*Get MPU6050 data*/
+
+        // 得到加速度传感器数据 X Y Z加速度数据
+        // MPU_Get_Accelerometer(&aacx, &aacy, &aacz); 
+        
+        // 得到陀螺仪数据 X Y Z角速度数据
+        // MPU_Get_Gyroscope(&gyrox, &gyroy, &gyroz);  
+        
+        // 得到俯仰角pitch，和翻滚角roll，yaw航向角数据
+        mpu_dmp_get_data(&pitch, &roll, &yaw); 
+#endif /*Get MPU6050 data*/
 
         printf("MPU6050 pitch:%d roll:%d yaw:%d \r\n",
                (int)pitch, (int)roll, (int)yaw);
