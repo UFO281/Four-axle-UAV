@@ -27,6 +27,7 @@
 #include "mpu6050.h"
 #include "delay.h"
 #include "usart.h"
+#include "IIC.h"
 
 #define MPU6050                     // 定义我们使用的传感器为MPU6050
 #define MOTION_DRIVER_TARGET_MSP430 // 定义驱动部分,采用MSP430的驱动(移植到STM32F1)
@@ -3045,7 +3046,7 @@ void mget_ms(unsigned long *time)
 u8 mpu_dmp_init(void)
 {
     u8 res = 0;
-    MPU_IIC_Init();      // 初始化IIC总线
+    IIC_Init();       // 初始化IIC总线
     if (mpu_init() == 0) // 初始化MPU6050
     {
         res = mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL); // 设置所需要的传感器

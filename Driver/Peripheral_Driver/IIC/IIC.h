@@ -13,6 +13,12 @@
 
 #include "stm32f10x.h"
 
+
+#define IIC_SCL_IO     GPIO_Pin_10
+#define IIC_SDA_IO     GPIO_Pin_11
+
+
+
 // #define HardWare_IIC /*use hard ware iic*/
 
 #define SoftWare_IIC    /*use soft ware iic*/

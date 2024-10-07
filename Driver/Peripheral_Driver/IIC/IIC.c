@@ -93,7 +93,7 @@ void H_IIC_Stop(void)
 void S_IIC_W_SCL(unsigned char BitValue)
 {
     // 根据BitValue，设置SCL引脚的电平
-    GPIO_WriteBit(GPIOB, GPIO_Pin_3, (BitAction)BitValue);
+    GPIO_WriteBit(GPIOB,IIC_SCL_IO, (BitAction)BitValue);
 
     // 延时10us，防止时序频率超过要求
     Delay_us(10);
@@ -108,7 +108,7 @@ void S_IIC_W_SCL(unsigned char BitValue)
 void S_IIC_W_SDA(unsigned char BitValue)
 {
     // 根据BitValue，设置SDA引脚的电平，BitValue要实现非0即1的特性
-    GPIO_WriteBit(GPIOB, GPIO_Pin_4, (BitAction)BitValue);
+    GPIO_WriteBit(GPIOB, IIC_SDA_IO, (BitAction)BitValue);
 
     // 延时10us，防止时序频率超过要求
     Delay_us(10);
@@ -125,7 +125,7 @@ unsigned char S_IIC_R_SDA(void)
     unsigned char BitValue;
 
     // 读取SDA电平
-    BitValue = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_4);
+    BitValue = GPIO_ReadInputDataBit(GPIOB, IIC_SDA_IO);
 
     // 延时10us，防止时序频率超过要求
     Delay_us(10);
@@ -143,19 +143,19 @@ unsigned char S_IIC_R_SDA(void)
 void S_IIC_Init(void)
 {
     /*开启时钟*/
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB, ENABLE);
     /*PB3 PB4 为JTAG的IO 所以需要禁止JATG 否则用不了PB3 PB4*/
-    GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+    // GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
     /*GPIO初始化*/
     GPIO_InitTypeDef GPIO_InitStructure;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4; /*SCL:PB3*/
+    GPIO_InitStructure.GPIO_Pin = IIC_SCL_IO | IIC_SDA_IO; 
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-    /*设置默认电平*/
-    GPIO_SetBits(GPIOB, GPIO_Pin_3 | GPIO_Pin_4); // PB6,PB7 输出高
+    /*设置默认电平 IIC SCL 拉高为空闲状态*/
+    GPIO_SetBits(GPIOB, IIC_SCL_IO | IIC_SDA_IO); // PB6,PB7 输出高
 }
 
 /**
