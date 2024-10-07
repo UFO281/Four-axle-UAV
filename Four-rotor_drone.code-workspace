@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+        "files.associations": {
+            "*.h": "c",
+            "*.c": "c",
+            "*.ex": "makefile",
+            "STC12CXX.H": "cpp",
+            "LED.C": "cpp"
+        },
+        "commentTranslate.targetLanguage": "zh-CN",
+        "commentTranslate.source": "Bing"
+    }
+}
