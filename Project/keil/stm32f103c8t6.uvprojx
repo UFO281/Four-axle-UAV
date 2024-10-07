@@ -410,11 +410,6 @@
               <FilePath>..\..\Driver\Device_Driver\MPU6050\mpu6050.c</FilePath>
             </File>
             <File>
-              <FileName>mpuiic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Driver\Device_Driver\MPU6050\mpuiic.c</FilePath>
-            </File>
-            <File>
               <FileName>inv_mpu.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Driver\Device_Driver\MPU6050\eMPL\inv_mpu.c</FilePath>
