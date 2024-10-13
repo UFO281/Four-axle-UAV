@@ -12,7 +12,7 @@
  */
 
 /*使用温湿度传感器AHT10*/
-// #define USE_AHT10
+#define USE_AHT10
 
 #define USE_MPU6050
 

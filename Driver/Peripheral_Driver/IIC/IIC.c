@@ -1,7 +1,9 @@
 /**
  * @file IIC.c
  * @author wls (ufo281@outlook.com)
- * @brief
+ * 
+ * @brief   IIC
+ * 
  * @version 1.0
  * @date 2024-10-03
  *
@@ -144,6 +146,7 @@ void S_IIC_Init(void)
 {
     /*开启时钟*/
     RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB, ENABLE);
+    
     /*PB3 PB4 为JTAG的IO 所以需要禁止JATG 否则用不了PB3 PB4*/
     // GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 

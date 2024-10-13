@@ -14,8 +14,8 @@
 #include "stm32f10x.h"
 
 
-#define IIC_SCL_IO     GPIO_Pin_10
-#define IIC_SDA_IO     GPIO_Pin_11
+#define IIC_SCL_IO     GPIO_Pin_6
+#define IIC_SDA_IO     GPIO_Pin_7
 
 
 
