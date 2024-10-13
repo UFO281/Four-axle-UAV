@@ -1,9 +1,9 @@
 /**
  * @file IIC.c
  * @author wls (ufo281@outlook.com)
- * 
+ *
  * @brief   IIC
- * 
+ *
  * @version 1.0
  * @date 2024-10-03
  *
@@ -28,6 +28,49 @@ ErrorStatus H_IIC_Checkevent(I2C_TypeDef *I2Cx, uint32_t I2C_EVENT)
  */
 void H_IIC_Init(void)
 {
+
+    // 开启I2C1的时钟
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
+
+    // 开启GPIOB的时钟
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
+    /*GPIO初始化*/
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+    GPIO_InitStructure.GPIO_Pin = IIC_SDA_IO | IIC_SCL_IO;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+
+    // 将PB6和PB7引脚初始化为复用开漏输出
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+    /*I2C初始化*/
+    // 定义结构体变量
+    I2C_InitTypeDef I2C_InitStructure;
+
+    // 模式，选择为I2C模式
+    I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
+
+    // 时钟速度，选择为50KHz
+    I2C_InitStructure.I2C_ClockSpeed = 50000;
+
+    // 时钟占空比，选择Tlow/Thigh = 2
+    I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
+
+    // 应答，选择使能
+    I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
+
+    // 应答地址，选择7位，从机模式下才有效
+    I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+    
+    // 自身地址，从机模式下才有效
+    I2C_InitStructure.I2C_OwnAddress1 = 0x00;
+
+    // 将结构体变量交给I2C_Init，配置I2C2
+    I2C_Init(I2C1, &I2C_InitStructure);
+
+    /*I2C使能*/
+    I2C_Cmd(I2C1, ENABLE); // 使能I2C1，开始运行
 }
 
 void H_IIC_Sart(void)
@@ -95,7 +138,7 @@ void H_IIC_Stop(void)
 void S_IIC_W_SCL(unsigned char BitValue)
 {
     // 根据BitValue，设置SCL引脚的电平
-    GPIO_WriteBit(GPIOB,IIC_SCL_IO, (BitAction)BitValue);
+    GPIO_WriteBit(GPIOB, IIC_SCL_IO, (BitAction)BitValue);
 
     // 延时10us，防止时序频率超过要求
     Delay_us(10);
@@ -145,14 +188,14 @@ unsigned char S_IIC_R_SDA(void)
 void S_IIC_Init(void)
 {
     /*开启时钟*/
-    RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOB, ENABLE);
-    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
     /*PB3 PB4 为JTAG的IO 所以需要禁止JATG 否则用不了PB3 PB4*/
     // GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
     /*GPIO初始化*/
     GPIO_InitTypeDef GPIO_InitStructure;
-    GPIO_InitStructure.GPIO_Pin = IIC_SCL_IO | IIC_SDA_IO; 
+    GPIO_InitStructure.GPIO_Pin = IIC_SCL_IO | IIC_SDA_IO;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
