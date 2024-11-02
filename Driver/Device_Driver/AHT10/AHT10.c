@@ -228,7 +228,7 @@ u8 AHT10ReadData(float *temperature, u8 *humidity)
 
     if ((ack & 0x40) == 0)
     {
-        printf("AHT10ReadData  ERROR! \r\n");
+        printf("AHT10ReadData  OK! \r\n");
         // databuff[0] = IIC_Recive_Data_Byte(1);
         // databuff[1] = IIC_Recive_Data_Byte(1);
         // databuff[2] = IIC_Recive_Data_Byte(1);
