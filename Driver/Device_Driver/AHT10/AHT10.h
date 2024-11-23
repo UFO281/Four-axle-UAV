@@ -2,6 +2,7 @@
 #define _AHT10_H__
 
 #include "stm32f10x.h"
+#include "usart.h"
 
 
 #define AHT10_ADDRESS 0x70

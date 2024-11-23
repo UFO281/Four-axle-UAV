@@ -14,7 +14,7 @@
 /*使用温湿度传感器AHT10*/
 #define USE_AHT10
 
-#define USE_MPU6050
+//#define USE_MPU6050
 
 #include "stm32f10x.h"
 #include "Delay.h"
