@@ -14,10 +14,10 @@ typedef struct
  
 extern Bmp280DataTypeDef Bmp280Data;
  
-#define AddrWrite 0xEC // ´Ó»úµØÖ·+Ğ´ĞÅºÅ  SDOÄ¬ÈÏ½ÓµØ
-#define AddrRead 0xED // ´Ó»úµØÖ·+¶ÁÈ¡ĞÅºÅ  0xEC+1
-#define NumRestAddr 0XE0 // Êı¾İ¸´Î»µØÖ·
-#define NumRestDate 0XB6 // Êı¾İ¸´Î»Êı¾İ
+#define AddrWrite 0xEC // ä»æœºåœ°å€+å†™ä¿¡å·  SDOé»˜è®¤æ¥åœ°
+#define AddrRead 0xED // ä»æœºåœ°å€+è¯»å–ä¿¡å·  0xEC+1
+#define NumRestAddr 0XE0 // æ•°æ®å¤ä½åœ°å€
+#define NumRestDate 0XB6 // æ•°æ®å¤ä½æ•°æ®
 	#ifndef delay_ms
 	#define delay_ms(t) HAL_Delay(t)
 	#endif

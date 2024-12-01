@@ -2,39 +2,39 @@
 #define __BMPIIC_H
 //#include "sys.h" 
 #include "main.h"
-//IO·½ÏòÉèÖÃ
+//IOæ–¹å‘è®¾ç½®
 
 
 #define BMP_SDA_IN()  {GPIOB->CRH&=0XFFFF0FFF;GPIOB->CRH|=8<<12;}
 #define BMP_SDA_OUT() {GPIOB->CRH&=0XFFFF0FFF;GPIOB->CRH|=3<<12;}
 //#define BMP_SDA_IN()  {GPIO_PORT_IIC -> MODER &= 0xffffff3f;}
 //#define BMP_SDA_OUT() {GPIO_PORT_IIC -> MODER &= 0xffffff3f; GPIO_PORT_IIC -> MODER |= (uint32_t)(1 << 6);}
-//IO²Ù×÷º¯Êý	 
+//IOæ“ä½œå‡½æ•°	 
 //#define BMP_IIC_SCL    PBout(10) 		//SCL
 //#define BMP_IIC_SDA    PBout(11) 		//SDA	 
-//#define BMP_READ_SDA   PBin(11) 		//ÊäÈëSDA 
+//#define BMP_READ_SDA   PBin(11) 		//è¾“å…¥SDA 
 
 
 #define BMP_IIC_SCL_RESET   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_10,GPIO_PIN_RESET) 		//SCL
 #define BMP_IIC_SDA_RESET   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_11,GPIO_PIN_RESET)	//SDA		 
 #define BMP_IIC_SCL_SET     HAL_GPIO_WritePin(GPIOB,GPIO_PIN_10,GPIO_PIN_SET)		//SCL
 #define BMP_IIC_SDA_SET     HAL_GPIO_WritePin(GPIOB,GPIO_PIN_11,GPIO_PIN_SET)		//SDA	 
-#define BMP_READ_SDA    		HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_11)//ÊäÈëSDA 
+#define BMP_READ_SDA    		HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_11)//è¾“å…¥SDA 
  
 
 #define u8 uint8_t
 //#define delay_us HAL_Delay
-//IICËùÓÐ²Ù×÷º¯Êý
+//IICæ‰€æœ‰æ“ä½œå‡½æ•°
 void delay_us(uint32_t us);
-void BMP_IIC_Delay(void);				//BMP IICÑÓÊ±º¯Êý
-void BMP_IIC_Init(void);                //³õÊ¼»¯IICµÄIO¿Ú				 
-void BMP_IIC_Start(void);				//·¢ËÍIIC¿ªÊ¼ÐÅºÅ
-void BMP_IIC_Stop(void);	  			//·¢ËÍIICÍ£Ö¹ÐÅºÅ
-void BMP_IIC_Send_Byte(u8 txd);			//IIC·¢ËÍÒ»¸ö×Ö½Ú
-u8 BMP_IIC_Read_Byte(unsigned char ack);//IIC¶ÁÈ¡Ò»¸ö×Ö½Ú
-u8 BMP_IIC_Wait_Ack(void); 				//IICµÈ´ýACKÐÅºÅ
-void BMP_IIC_Ack(void);					//IIC·¢ËÍACKÐÅºÅ
-void BMP_IIC_NAck(void);				//IIC²»·¢ËÍACKÐÅºÅ
+void BMP_IIC_Delay(void);				//BMP IICå»¶æ—¶å‡½æ•°
+void BMP_IIC_Init(void);                //åˆå§‹åŒ–IICçš„IOå£				 
+void BMP_IIC_Start(void);				//å‘é€IICå¼€å§‹ä¿¡å·
+void BMP_IIC_Stop(void);	  			//å‘é€IICåœæ­¢ä¿¡å·
+void BMP_IIC_Send_Byte(u8 txd);			//IICå‘é€ä¸€ä¸ªå­—èŠ‚
+u8 BMP_IIC_Read_Byte(unsigned char ack);//IICè¯»å–ä¸€ä¸ªå­—èŠ‚
+u8 BMP_IIC_Wait_Ack(void); 				//IICç­‰å¾…ACKä¿¡å·
+void BMP_IIC_Ack(void);					//IICå‘é€ACKä¿¡å·
+void BMP_IIC_NAck(void);				//IICä¸å‘é€ACKä¿¡å·
 
 #endif
 

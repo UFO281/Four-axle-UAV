@@ -1,23 +1,23 @@
 #include "bmpiic.h"
 //#include "delay.h"
 // 	#include "main.h"  
-  //BMP IIC ÑÓÊ±º¯Êý
+  //BMP IIC å»¶æ—¶å‡½æ•°
 void delay_us(uint32_t us)
 {
 
     uint32_t i;
 
-    // ¼ÆÊ±72½ÚÅÄ£¬Ä¬ÈÏÊ±ÖÓ72M£¨¶ÔÓ¦1us£©
-    // ÏÂ´ÎÔËÐÐSysTick_ConfigÊ±ÓÖ»á¿ªÆôÊ±ÖÓ
+    // è®¡æ—¶72èŠ‚æ‹ï¼Œé»˜è®¤æ—¶é’Ÿ72Mï¼ˆå¯¹åº”1usï¼‰
+    // ä¸‹æ¬¡è¿è¡ŒSysTick_Configæ—¶åˆä¼šå¼€å¯æ—¶é’Ÿ
     SysTick_Config(72);
 
     for (i = 0; i < us; i++)
     {
-        // µÈ´ý¼ÆÊýµ½0
+        // ç­‰å¾…è®¡æ•°åˆ°0
         while (!((SysTick->CTRL) & SysTick_CTRL_COUNTFLAG_Msk));
     }
 
-    // ¹Øµô¶¨Ê±Æ÷
+    // å…³æŽ‰å®šæ—¶å™¨
     SysTick->CTRL &= ~(SysTick_CTRL_ENABLE_Msk);
 
 }
@@ -26,41 +26,41 @@ void BMP_IIC_Delay(void)
 	delay_us(8);
 }
 
-//³õÊ¼»¯IIC
+//åˆå§‹åŒ–IIC
 void BMP_IIC_Init(void)
 {
-//ÓÉCUBEMXÉú³É	
+//ç”±CUBEMXç”Ÿæˆ	
  
 }
-//²úÉúIICÆðÊ¼ÐÅºÅ
+//äº§ç”ŸIICèµ·å§‹ä¿¡å·
 void BMP_IIC_Start(void)
 {
-	BMP_SDA_OUT();     //sdaÏßÊä³ö
+	BMP_SDA_OUT();     //sdaçº¿è¾“å‡º
 	BMP_IIC_SDA_SET;	  	  
 	BMP_IIC_SCL_SET;
 	BMP_IIC_Delay();
  	BMP_IIC_SDA_RESET;//START:when CLK is high,DATA change form high to low 
 	BMP_IIC_Delay();
-	BMP_IIC_SCL_RESET;//Ç¯×¡I2C×ÜÏß£¬×¼±¸·¢ËÍ»ò½ÓÊÕÊý¾Ý 
+	BMP_IIC_SCL_RESET;//é’³ä½I2Cæ€»çº¿ï¼Œå‡†å¤‡å‘é€æˆ–æŽ¥æ”¶æ•°æ® 
 }	  
-//²úÉúIICÍ£Ö¹ÐÅºÅ
+//äº§ç”ŸIICåœæ­¢ä¿¡å·
 void BMP_IIC_Stop(void)
 {
-	BMP_SDA_OUT();//sdaÏßÊä³ö
+	BMP_SDA_OUT();//sdaçº¿è¾“å‡º
 	BMP_IIC_SCL_RESET;
 	BMP_IIC_SDA_RESET;//STOP:when CLK is high DATA change form low to high
  	BMP_IIC_Delay();
 	BMP_IIC_SCL_SET;  
-	BMP_IIC_SDA_SET;//·¢ËÍI2C×ÜÏß½áÊøÐÅºÅ
+	BMP_IIC_SDA_SET;//å‘é€I2Cæ€»çº¿ç»“æŸä¿¡å·
 	BMP_IIC_Delay();							   	
 }
-//µÈ´ýÓ¦´ðÐÅºÅµ½À´
-//·µ»ØÖµ£º1£¬½ÓÊÕÓ¦´ðÊ§°Ü
-//        0£¬½ÓÊÕÓ¦´ð³É¹¦
+//ç­‰å¾…åº”ç­”ä¿¡å·åˆ°æ¥
+//è¿”å›žå€¼ï¼š1ï¼ŒæŽ¥æ”¶åº”ç­”å¤±è´¥
+//        0ï¼ŒæŽ¥æ”¶åº”ç­”æˆåŠŸ
 u8 BMP_IIC_Wait_Ack(void)
 {
 	u8 ucErrTime=0;
-	BMP_SDA_IN();      //SDAÉèÖÃÎªÊäÈë  
+	BMP_SDA_IN();      //SDAè®¾ç½®ä¸ºè¾“å…¥  
 	BMP_IIC_SDA_SET;delay_us(4);	   
 	BMP_IIC_SCL_SET;delay_us(4);	 
 	while(BMP_READ_SDA)
@@ -72,10 +72,10 @@ u8 BMP_IIC_Wait_Ack(void)
 			return 1;
 		}
 	}
-	BMP_IIC_SCL_RESET;//Ê±ÖÓÊä³ö0 	   
+	BMP_IIC_SCL_RESET;//æ—¶é’Ÿè¾“å‡º0 	   
 	return 0;  
 } 
-//²úÉúACKÓ¦´ð
+//äº§ç”ŸACKåº”ç­”
 void BMP_IIC_Ack(void)
 {
 	BMP_IIC_SCL_RESET;
@@ -86,7 +86,7 @@ void BMP_IIC_Ack(void)
 	BMP_IIC_Delay();
 	BMP_IIC_SCL_RESET;
 }
-//²»²úÉúACKÓ¦´ð		    
+//ä¸äº§ç”ŸACKåº”ç­”		    
 void BMP_IIC_NAck(void)
 {
 	BMP_IIC_SCL_RESET;
@@ -97,15 +97,15 @@ void BMP_IIC_NAck(void)
 	BMP_IIC_Delay();
 	BMP_IIC_SCL_RESET;
 }					 				     
-//IIC·¢ËÍÒ»¸ö×Ö½Ú
-//·µ»Ø´Ó»úÓÐÎÞÓ¦´ð
-//1£¬ÓÐÓ¦´ð
-//0£¬ÎÞÓ¦´ð			  
+//IICå‘é€ä¸€ä¸ªå­—èŠ‚
+//è¿”å›žä»Žæœºæœ‰æ— åº”ç­”
+//1ï¼Œæœ‰åº”ç­”
+//0ï¼Œæ— åº”ç­”			  
 void BMP_IIC_Send_Byte(u8 txd)
 {                        
     u8 t;   
 	BMP_SDA_OUT(); 	    
-    BMP_IIC_SCL_RESET;//À­µÍÊ±ÖÓ¿ªÊ¼Êý¾Ý´«Êä
+    BMP_IIC_SCL_RESET;//æ‹‰ä½Žæ—¶é’Ÿå¼€å§‹æ•°æ®ä¼ è¾“
     for(t=0;t<8;t++)
     {          
 				if(((txd&0x80)>>7))
@@ -125,11 +125,11 @@ void BMP_IIC_Send_Byte(u8 txd)
 		BMP_IIC_Delay();
     }	 
 } 	    
-//¶Á1¸ö×Ö½Ú£¬ack=1Ê±£¬·¢ËÍACK£¬ack=0£¬·¢ËÍnACK   
+//è¯»1ä¸ªå­—èŠ‚ï¼Œack=1æ—¶ï¼Œå‘é€ACKï¼Œack=0ï¼Œå‘é€nACK   
 u8 BMP_IIC_Read_Byte(unsigned char ack)
 {
 	unsigned char i,receive=0;
-	BMP_SDA_IN();//SDAÉèÖÃÎªÊäÈë
+	BMP_SDA_IN();//SDAè®¾ç½®ä¸ºè¾“å…¥
     for(i=0;i<8;i++ )
 	{
         BMP_IIC_SCL_RESET; 
@@ -140,9 +140,9 @@ u8 BMP_IIC_Read_Byte(unsigned char ack)
 		BMP_IIC_Delay(); 
     }					 
     if (!ack)
-        BMP_IIC_NAck();//·¢ËÍnACK
+        BMP_IIC_NAck();//å‘é€nACK
     else
-        BMP_IIC_Ack(); //·¢ËÍACK   
+        BMP_IIC_Ack(); //å‘é€ACK   
     return receive;
 }
 
