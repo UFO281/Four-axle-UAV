@@ -82,7 +82,7 @@ void AHT10Init()
     I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
 
     // 时钟速度，选择为398KHz
-    I2C_InitStructure.I2C_ClockSpeed = 300000;
+    I2C_InitStructure.I2C_ClockSpeed = 50000;
 
     // 时钟占空比，选择Tlow/Thigh = 2
     I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
@@ -228,7 +228,7 @@ u8 AHT10ReadData(float *temperature, u8 *humidity)
 
     if ((ack & 0x40) == 0)
     {
-        printf("AHT10ReadData  OK! \r\n");
+        // printf("AHT10ReadData  OK! \r\n");
         // databuff[0] = IIC_Recive_Data_Byte(1);
         // databuff[1] = IIC_Recive_Data_Byte(1);
         // databuff[2] = IIC_Recive_Data_Byte(1);
