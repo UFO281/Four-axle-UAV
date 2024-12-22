@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\APP;..\..\Driver\Core;..\..\Driver\Peripheral_Driver_Lib\Include;..\..\Driver\Device_Driver\Delay;..\..\Driver\Device_Driver\Uart;..\..\Driver\Device_Driver\LED;..\..\Driver\Device_Driver\MPU6050;..\..\Driver\Device_Driver\MPU6050\eMPL;..\..\Driver\Peripheral_Driver\Delay;..\..\Driver\Peripheral_Driver\Uart;..\..\Driver\Device_Driver\AHT10;..\..\Driver\Peripheral_Driver\IIC</IncludePath>
+              <IncludePath>..\..\APP;..\..\Driver\Core;..\..\Driver\Peripheral_Driver_Lib\Include;..\..\Driver\Device_Driver\Delay;..\..\Driver\Device_Driver\Uart;..\..\Driver\Device_Driver\LED;..\..\Driver\Device_Driver\MPU6050;..\..\Driver\Device_Driver\MPU6050\eMPL;..\..\Driver\Peripheral_Driver\Delay;..\..\Driver\Peripheral_Driver\Uart;..\..\Driver\Device_Driver\AHT10;..\..\Driver\Peripheral_Driver\IIC;..\..\Driver\Device_Driver\BMP280;..\..\Driver\Peripheral_Driver\SPI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -424,6 +424,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\Driver\Device_Driver\AHT10\AHT10.c</FilePath>
             </File>
+            <File>
+              <FileName>bmp280.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Driver\Device_Driver\BMP280\bmp280.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -443,6 +448,11 @@
               <FileName>IIC.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Driver\Peripheral_Driver\IIC\IIC.c</FilePath>
+            </File>
+            <File>
+              <FileName>SPI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Driver\Peripheral_Driver\SPI\SPI.c</FilePath>
             </File>
           </Files>
         </Group>

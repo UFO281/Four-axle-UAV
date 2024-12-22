@@ -9,6 +9,7 @@
  * 
  */
 #include "BMP280.h"
+#include "Delay.h"
 
 unsigned short dig_T1;
 short dig_T2;
@@ -24,14 +25,14 @@ short dig_P8;
 short dig_P9;
 double basepress = 0;
 
-void Bmp280WriteByte(uint8_t addr, uint8_t dat)
+void Bmp280WriteByte(unsigned char addr, unsigned char dat)
 {
-    HAL_I2C_Mem_Write(&hi2c1, AddrWrite, addr, I2C_MEMADD_SIZE_8BIT, &dat, 1, 10000);
+    // HAL_I2C_Mem_Write(&hi2c1, AddrWrite, addr, I2C_MEMADD_SIZE_8BIT, &dat, 1, 10000);
 }
-uint8_t Bmp280ReadByte(uint8_t addr)
+unsigned char Bmp280ReadByte(unsigned char addr)
 {
-    uint8_t dat;
-    HAL_I2C_Mem_Read(&hi2c1, AddrWrite, addr, I2C_MEMADD_SIZE_8BIT, &dat, 1, 10000);
+    unsigned char dat;
+    // HAL_I2C_Mem_Read(&hi2c1, AddrWrite, addr, I2C_MEMADD_SIZE_8BIT, &dat, 1, 10000);
 
     return dat;
 }
@@ -64,7 +65,7 @@ short bmp280_MultipleReadTwo(unsigned char addr)
 void Bmp280Init()
 {
 
-    uint8_t id;
+    unsigned char id;
 
     Bmp280WriteByte(0xE0, 0xB6); // 清除状态
     id = Bmp280ReadByte(0xD0);   // 读取ID  0x58
@@ -91,12 +92,12 @@ void Bmp280Init()
 
     //	printf("%d %d %d\r\n",dig_T1,dig_T2,dig_T3);
     //	printf("%d %d %d %d %d %d %d %d %d\r\n",dig_P1,dig_P2,dig_P3,dig_P4,dig_P5,dig_P6,dig_P7,dig_P8,dig_P9);
-    delay_ms(200);
+    Delay_ms(200);
 }
 
 Bmp280DataTypeDef Bmp280Data;
 
-uint8_t bmp280_GetValue(void)
+unsigned char bmp280_GetValue(void)
 {
     double adc_T;
     double adc_P;
@@ -137,7 +138,7 @@ float bmp280_GetAltitude(void)
 {
     bmp280_GetValue();
     // 注意QNH为平均海平面气压（修正气压），请搜索最近的机场获取数据
-    uint32_t QNH = 1019.2 * 100;
+    unsigned int QNH = 1019.2 * 100;
     if (basepress != 0)
         QNH = basepress; // 将QNH设置为当前气压，用于测距。
     //	return (1 - pow(Bmp280Data.P / (QNH * pow((1 - 2.25577e-5 * 85),5.25588)), 0.190294)) * 44330.8;
@@ -157,15 +158,15 @@ double bmp280_Get_P()
 
     return Bmp280Data.P;
 }
-void bmp280_sleep() // bmp睡眠
+void bmp280_sleep(void) // bmp睡眠
 {
-    uint8_t s = Bmp280ReadByte(0xf4);
+    unsigned char s = Bmp280ReadByte(0xf4);
     s &= 0xff << 2;
     Bmp280WriteByte(0xf4, s);
 }
-void bmp280_wake() // bmp唤醒
+void bmp280_wake(void) // bmp唤醒
 {
-    uint8_t s = Bmp280ReadByte(0xf4);
+    unsigned char s = Bmp280ReadByte(0xf4);
     s &= 0xff << 2;
     s |= 3;
     Bmp280WriteByte(0xf4, s);

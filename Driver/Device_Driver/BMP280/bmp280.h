@@ -14,9 +14,8 @@
  
         
 #include <math.h>    
-#include "main.h"
 #include "stdio.h"
-#include "i2c.h"
+
 
 typedef struct 
 {
@@ -31,23 +30,23 @@ extern Bmp280DataTypeDef Bmp280Data;
 #define NumRestAddr 0XE0 // 数据复位地址
 #define NumRestDate 0XB6 // 数据复位数据
 #ifndef delay_ms
-    #define delay_ms(t) HAL_Delay(t)
+    // #define delay_ms(t) delay_ms(t)
 #endif
 
 
 void Bmp280Init(void);
-uint8_t bmp280_GetValue(void);
+unsigned char bmp280_GetValue(void);
 float bmp280_GetAltitude(void);
 double bmp280_GetTEMPERATURE(void);
 double bmp280_Get_P(void);
 
-void bmp280_sleep();
-void bmp280_wake();
+void bmp280_sleep(void);
+void bmp280_wake(void);
 
 #endif
 
 #if 0
-/* use example
+//use example
 
 /**
  * @brief  The application entry point.
@@ -106,7 +105,7 @@ int main(void)
     OLED_Init();
     OLED_ColorTurn(0);   // 0正常显示，1 反色显示
     OLED_DisplayTurn(0); // 0正常显示 1 屏幕翻转显示
-    uint8_t st[255] = {0};
+    unsigned char st[255] = {0};
     extern double basepress;
 
     while (1)
@@ -142,5 +141,5 @@ int main(void)
     /* USER CODE END 3 */
 }
 
-*/
+
 #endif
