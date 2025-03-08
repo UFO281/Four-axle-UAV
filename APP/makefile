@@ -11,16 +11,16 @@ OBJS = $(SRCS:%.c= $(BUILD_DIR)/%.o)
 all: $(OBJS)
 
 # 如果目录不存在就创建他
-$(shell mkdir -p $(BUILD_DIR))
+# $(shell mkdir -p $(BUILD_DIR))
 
 # 编译规则：将 .c 文件编译为 build 目录下的 .o 文件
 # $(BUILD_DIR)/%.o，BUILD_DIR变量下所有的.o文件,
 # %.c，当前目录下所有的.c文件
 $(BUILD_DIR)/%.o: %.c
-
-	@echo "【55】 PRO_DIR = $(PRO_DIR)"
-	@echo "\n【66】INC_DIR = $(INC_DIR)\n"
-	@echo "\n【77】I_INC_DIR = $(I_INC_DIR)\n"
+# @echo "\n【66】PRO_DIR = $(PRO_DIR) \n"
+# @echo "\n【77】INC_DIRS = $(INC_DIRS) \n"
+# @echo "\n【88】I_INC_DIR = $(I_INC_DIR) \n"
+	@echo "\n 【66】$@ $< \n"
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 # 清理生成的文件
