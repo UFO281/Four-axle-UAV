@@ -55,22 +55,20 @@ CPU = -mcpu=cortex-m3
 # -MF"$(@:%.o=%.d)"  指定 `.d` 依赖文件的路径（`.o` → `.d）
 MCU_C = $(CPU) \
 		-mthumb \
-		$(FPU) \
-		$(FLOAT-ABI) \
-		-mfloat-abi=soft\
-		-mfpu=fpv4-sp-d16\
 		-ffunction-sections\
 		-fdata-sections\
 		-fno-common\
 		-fmessage-length=0\
-		-fno-builtin\
-		-ffreestanding\
 		-fno-strict-aliasing\
 		-fshort-enums\
 		-gdwarf-2\
 		-MMD \
-		-MP \
-		# -MF"$(@:%.o=%.d)"
+		-MP 
+# $(FPU) \
+# $(FLOAT-ABI) \
+# -mfloat-abi=soft\
+# -mfpu=fpv4-sp-d16\
+# -MF"$(@:%.o=%.d)"
 
 
 # 定义编译选项（C 编译器的参数）
@@ -91,12 +89,12 @@ MCU_C = $(CPU) \
 CFLAGS := -Wall \
          -Wextra \
          -Og \
-		 $(I_INC_DIR) \
          -fdiagnostics-color=always \
 		 -g \
 		 -std=c99 \
 		 -DDEBUG \
 		 -Werror \
-		 $(MCU_C)
+		 $(MCU_C)\
+		 $(I_INC_DIR) 
 
 #-------------------CFLAGS(compile options)--------------------------------------------
